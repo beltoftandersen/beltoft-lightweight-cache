@@ -72,6 +72,10 @@ final class Triggers {
 			add_action( $hook, array( __CLASS__, 'product_id' ) );
 		}
 		add_action( 'woocommerce_settings_saved', array( __CLASS__, 'everything' ) );
+
+		// A scheduled sale starts or ends: WooCommerce changes the prices without saving the products one by one.
+		add_action( 'wc_after_products_starting_sales', array( __CLASS__, 'products' ) );
+		add_action( 'wc_after_products_ending_sales', array( __CLASS__, 'products' ) );
 	}
 
 	/**
@@ -206,6 +210,17 @@ final class Triggers {
 	 */
 	public static function product_id( $product_id ): void {
 		self::queue( Urls::for_product( (int) $product_id ) );
+	}
+
+	/**
+	 * Several WooCommerce products changed.
+	 *
+	 * @param mixed $product_ids Product IDs.
+	 */
+	public static function products( $product_ids ): void {
+		foreach ( array_slice( array_map( 'intval', (array) $product_ids ), 0, Purge::MAX_URIS ) as $product_id ) {
+			self::queue( Urls::for_product( $product_id ) );
+		}
 	}
 
 	/**

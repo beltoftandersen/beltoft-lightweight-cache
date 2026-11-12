@@ -127,6 +127,14 @@ class TriggersTest extends \WP_UnitTestCase {
 		$this->assertTrue( Purge::queued()['all'] );
 	}
 
+	public function test_a_scheduled_sale_clears_its_products() {
+		$id = self::factory()->post->create( array( 'post_status' => 'publish' ) );
+		Purge::reset();
+		do_action( 'wc_after_products_ending_sales', array( $id ) );
+
+		$this->assertContains( wp_parse_url( get_permalink( $id ), PHP_URL_PATH ), Purge::queued()['uris'] );
+	}
+
 	public function test_settings_defaults_and_sanitising() {
 		delete_option( Settings::OPTION );
 		$this->assertSame(
