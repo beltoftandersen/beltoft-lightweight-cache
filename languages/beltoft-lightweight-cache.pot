@@ -1,0 +1,170 @@
+# Copyright (C) 2026 beltoft.net
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Beltoft Lightweight Cache 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/beltoft-lightweight-cache\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-12T13:02:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: beltoft-lightweight-cache\n"
+
+#. Plugin Name of the plugin
+#: beltoft-lightweight-cache.php
+msgid "Beltoft Lightweight Cache"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: beltoft-lightweight-cache.php
+msgid "https://beltoft.net/"
+msgstr ""
+
+#. Description of the plugin
+#: beltoft-lightweight-cache.php
+msgid "Page cache controls for a server that caches pages in nginx: marks the pages that may be cached, clears them when content changes, and adds a Clear cache button."
+msgstr ""
+
+#. Author of the plugin
+#: beltoft-lightweight-cache.php
+msgid "beltoft.net"
+msgstr ""
+
+#: src/Admin.php:38
+#: src/Admin.php:39
+#: src/Admin.php:165
+msgid "Lightweight Cache"
+msgstr ""
+
+#: src/Admin.php:69
+msgid "Settings"
+msgstr ""
+
+#: src/Admin.php:94
+#: src/Admin.php:193
+#: src/Admin.php:195
+msgid "Clear cache"
+msgstr ""
+
+#: src/Admin.php:105
+msgid "You do not have permission to do this."
+msgstr ""
+
+#: src/Admin.php:145
+msgid "Cache cleared."
+msgstr ""
+
+#: src/Admin.php:150
+msgid "The object cache was cleared. The page cache was not: clearing is not set up on this server."
+msgstr ""
+
+#: src/Admin.php:171
+msgid "Page cache"
+msgstr ""
+
+#: src/Admin.php:175
+msgid "Let the server cache pages for visitors who are not signed in"
+msgstr ""
+
+#: src/Admin.php:180
+msgid "Keep a page cached for"
+msgstr ""
+
+#: src/Admin.php:194
+msgid "Removes every cached page and flushes the object cache."
+msgstr ""
+
+#: src/Admin.php:197
+msgid "Status"
+msgstr ""
+
+#: src/Admin.php:203
+msgid "Page cache: on."
+msgstr ""
+
+#: src/Admin.php:204
+msgid "Page cache: off. No page is marked for caching."
+msgstr ""
+
+#: src/Admin.php:211
+msgid "Automatic clearing: not set up on this server."
+msgstr ""
+
+#. translators: %s: the name of the clearing method.
+#: src/Admin.php:214
+#, php-format
+msgid "Automatic clearing: on, by %s."
+msgstr ""
+
+#: src/Admin.php:222
+msgid "Object cache: in use."
+msgstr ""
+
+#: src/Admin.php:223
+msgid "Object cache: not in use."
+msgstr ""
+
+#: src/Admin.php:229
+msgid "What is cached"
+msgstr ""
+
+#: src/Admin.php:230
+msgid "Cached: pages for visitors who are not signed in. A cached page is cleared when you change the content it shows."
+msgstr ""
+
+#: src/Admin.php:231
+msgid "Never cached: signed-in users, the admin area, carts, checkout and account pages, searches, previews, error pages, pages that set a cookie, and requests with a query string (tracking parameters excepted)."
+msgstr ""
+
+#: src/Admin.php:232
+msgid "To use another caching plugin, switch the page cache off here or deactivate this plugin."
+msgstr ""
+
+#: src/Admin.php:235
+msgid "Automatic clearing"
+msgstr ""
+
+#: src/Admin.php:236
+msgid "Pages are marked for caching, but this server has no way set up to clear them when content changes, so a changed page can stay cached until its time is up. The server needs this configuration, and one of the constants BELTOFT_LWC_PURGE_SPOOL (a folder that a process with the right to delete reads) or BELTOFT_LWC_CACHE_PATH (the cache folder, when PHP may delete in it) in wp-config.php."
+msgstr ""
+
+#: src/Admin.php:250
+msgid "5 minutes"
+msgstr ""
+
+#: src/Admin.php:251
+msgid "10 minutes"
+msgstr ""
+
+#: src/Admin.php:252
+msgid "30 minutes"
+msgstr ""
+
+#: src/Admin.php:253
+msgid "1 hour"
+msgstr ""
+
+#: src/Admin.php:254
+msgid "6 hours"
+msgstr ""
+
+#: src/Admin.php:255
+msgid "12 hours"
+msgstr ""
+
+#: src/Admin.php:256
+msgid "24 hours"
+msgstr ""
+
+#: src/FilePurger.php:40
+msgid "direct deletion"
+msgstr ""
+
+#: src/SpoolPurger.php:39
+msgid "request folder"
+msgstr ""
