@@ -27,6 +27,7 @@ final class Admin {
 		add_action( 'admin_bar_menu', array( __CLASS__, 'bar' ), 90 );
 		add_action( 'admin_notices', array( __CLASS__, 'notice' ) );
 		add_action( 'update_option_' . Settings::OPTION, array( __CLASS__, 'settings_changed' ), 10, 2 );
+		add_action( 'add_option_' . Settings::OPTION, array( __CLASS__, 'settings_added' ), 10, 2 );
 		add_filter( 'plugin_action_links_' . plugin_basename( BELTOFT_LWC_FILE ), array( __CLASS__, 'links' ) );
 	}
 
@@ -130,6 +131,17 @@ final class Admin {
 		if ( ( $old['enabled'] ?? 1 ) !== ( $new['enabled'] ?? 1 ) ) {
 			Purge::add_all();
 		}
+	}
+
+	/**
+	 * The option was saved for the first time (the defaults count as the old value).
+	 *
+	 * @param string $option Option name.
+	 * @param mixed  $value  New value.
+	 */
+	public static function settings_added( $option, $value ): void {
+		unset( $option );
+		self::settings_changed( array(), $value );
 	}
 
 	/**

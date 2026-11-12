@@ -119,6 +119,14 @@ class TriggersTest extends \WP_UnitTestCase {
 		$this->assertTrue( Purge::queued()['all'] );
 	}
 
+	public function test_switching_the_cache_off_the_first_time_clears_everything() {
+		delete_option( Settings::OPTION );
+		Purge::reset();
+		add_option( Settings::OPTION, array( 'enabled' => 0 ) );
+
+		$this->assertTrue( Purge::queued()['all'] );
+	}
+
 	public function test_settings_defaults_and_sanitising() {
 		delete_option( Settings::OPTION );
 		$this->assertSame(
