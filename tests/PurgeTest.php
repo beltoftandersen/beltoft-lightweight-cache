@@ -86,6 +86,13 @@ class PurgeTest extends \WP_UnitTestCase {
 		$this->assertTrue( $this->fake->calls[0][2] );
 	}
 
+	public function test_a_prefix_of_every_address_clears_everything() {
+		Purge::add( array(), array( '/' ) );
+
+		$this->assertTrue( Purge::queued()['all'] );
+		$this->assertSame( array(), Purge::queued()['prefixes'] );
+	}
+
 	public function test_clean_makes_a_safe_path() {
 		$this->assertSame( '/a%20b/', Urls::clean( '/a b/?x=1' ) );
 		$this->assertSame( '/x', Urls::clean( 'x#frag' ) );

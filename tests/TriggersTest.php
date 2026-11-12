@@ -26,6 +26,8 @@ class TriggersTest extends \WP_UnitTestCase {
 	}
 
 	public function test_publishing_queues_the_post_the_front_page_and_its_archives() {
+		$this->set_permalink_structure( '/%postname%/' );
+		create_initial_taxonomies();
 		$term = self::factory()->category->create( array( 'name' => 'News' ) );
 		Purge::reset();
 		$id = self::factory()->post->create(
@@ -43,6 +45,7 @@ class TriggersTest extends \WP_UnitTestCase {
 		$this->assertContains( wp_parse_url( get_category_link( $term ), PHP_URL_PATH ), $q['prefixes'] );
 		$this->assertContains( '/page/', $q['prefixes'] );
 		$this->assertFalse( $q['all'] );
+		$this->assertNotContains( '/', $q['prefixes'], 'A prefix of "/" would clear every page: ' . wp_json_encode( $q ) );
 	}
 
 	public function test_a_draft_clears_nothing_but_trashing_a_published_post_does() {

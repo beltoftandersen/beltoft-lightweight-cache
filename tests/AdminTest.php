@@ -51,4 +51,14 @@ class AdminTest extends \WP_UnitTestCase {
 
 		$this->assertSame( '', ob_get_clean() );
 	}
+
+	public function test_the_cli_state_reports_the_settings() {
+		update_option( \BeltoftLwc\Settings::OPTION, array( 'enabled' => 0, 'ttl' => 1800 ) );
+		$state = \BeltoftLwc\Cli::state();
+
+		$this->assertFalse( $state['enabled'] );
+		$this->assertSame( 1800, $state['ttl'] );
+		$this->assertSame( '', $state['clearing'] );
+		$this->assertFalse( $state['object_cache'] );
+	}
 }

@@ -85,7 +85,9 @@ final class Purge {
 		foreach ( $prefixes as $prefix ) {
 			$prefix = Urls::clean( (string) $prefix );
 
-			if ( '' !== $prefix ) {
+			if ( '/' === $prefix ) {
+				self::$all = true; // A prefix of every address.
+			} elseif ( '' !== $prefix ) {
 				self::$prefixes[ $prefix ] = true;
 			}
 		}

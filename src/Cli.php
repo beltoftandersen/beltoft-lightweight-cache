@@ -35,7 +35,7 @@ final class Cli {
 			'enabled'      => Settings::enabled(),
 			'ttl'          => Settings::ttl(),
 			'clearing'     => null === $purger ? '' : $purger->name(),
-			'object_cache' => wp_using_ext_object_cache(),
+			'object_cache' => (bool) wp_using_ext_object_cache(),
 		);
 	}
 

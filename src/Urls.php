@@ -85,7 +85,8 @@ final class Urls {
 	private static function list( array $uris, array $prefixes ): array {
 		return array(
 			'uris'     => array_values( array_unique( array_filter( $uris ) ) ),
-			'prefixes' => array_values( array_unique( array_filter( $prefixes ) ) ),
+			// A prefix of "/" would be every page: never from a list, a filter that wants that clears everything.
+			'prefixes' => array_values( array_diff( array_unique( array_filter( $prefixes ) ), array( '/' ) ) ),
 		);
 	}
 
@@ -163,12 +164,15 @@ final class Urls {
 		}
 
 		$prefixes = array_merge( $prefixes, self::term_paths( (int) $post->ID, $post->post_type ) );
-		$prefixes[] = self::path( get_author_posts_url( (int) $post->post_author ) );
+
+		if ( '' !== (string) get_the_author_meta( 'user_nicename', (int) $post->post_author ) ) {
+			$prefixes[] = self::path( get_author_posts_url( (int) $post->post_author ) );
+		}
 
 		$time       = strtotime( $post->post_date );
 		$prefixes[] = self::path( get_year_link( (int) gmdate( 'Y', $time ) ) );
 
-		$archive = get_post_type_archive_link( $post->post_type );
+		$archive = 'post' === $post->post_type ? false : get_post_type_archive_link( $post->post_type );
 
 		if ( is_string( $archive ) ) {
 			$prefixes[] = self::path( $archive );
@@ -214,7 +218,7 @@ final class Urls {
 			}
 		}
 
-		$list['prefixes'] = array_values( array_unique( array_filter( $list['prefixes'] ) ) );
+		$list = self::list( $list['uris'], $list['prefixes'] );
 
 		/** This filter is documented in src/Urls.php. */
 		return apply_filters( 'beltoft_lwc_purge_urls', $list, $post );
