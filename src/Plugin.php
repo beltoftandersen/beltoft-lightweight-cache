@@ -21,6 +21,7 @@ final class Plugin {
 		Marker::register();
 		Triggers::register();
 		Admin::register();
+		Cli::register();
 
 		// Switching the plugin off clears what it let the server store: nothing may keep caching afterwards.
 		add_action( 'deactivate_' . plugin_basename( BELTOFT_LWC_FILE ), array( Purge::class, 'now_all' ) );
